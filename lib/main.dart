@@ -45,7 +45,15 @@ class _MyHomePageState extends State<MyHomePage> {
             key: Key(item),
             onDismissed: (DismissDirection direction) {
               // setState(() => li.removeAt(index));
-              Scaffold.of(ctx).showSnackBar(const SnackBar(content: Text("data")),);
+              Scaffold.of(ctx).showSnackBar(
+                SnackBar(
+                  content: Text("Item Deleted"),
+                  action:
+                      SnackBarAction(
+                          label: "Undo",
+                          onPressed: () {}),
+                ),
+              );
             },
             child: ListTile(
               title: Center(
