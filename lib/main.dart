@@ -48,14 +48,13 @@ class _MyHomePageState extends State<MyHomePage> {
               Scaffold.of(ctx).showSnackBar(
                 SnackBar(
                   content: Text("Item Deleted"),
-                  action:
-                      SnackBarAction(
-                          label: "Undo",
-                          onPressed: () {
-                            setState(() {
-
-                            });
-                          }),
+                  action: SnackBarAction(
+                      label: "Undo",
+                      onPressed: () {
+                        setState(() {
+                          li.insert(index, item);
+                        });
+                      }),
                 ),
               );
             },
