@@ -30,14 +30,20 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
+    var li;
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
       body: ListView.builder(
+        itemCount: li.length,
         itemBuilder: (BuildContext context, int index) {
-          return ListTile(
-            title: Center(child: Text(" Dismissible")
+          return Dismissible(
+            key: Key("value"),
+            child: ListTile(
+              title: Center(
+                child: Text(" Dismissible"),
+              ),
             ),
           );
         },
