@@ -40,7 +40,10 @@ class _MyHomePageState extends State<MyHomePage> {
         itemBuilder: (BuildContext ctx, int index) {
           final String item = li[index];
           return Dismissible(
-            key: Key("value"),
+            key: Key(item),
+              onDismissed: (DismissDirection direction){
+
+              },
             child: ListTile(
               title: Center(
                 child: Text(item),
