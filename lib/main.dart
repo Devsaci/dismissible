@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -41,9 +43,10 @@ class _MyHomePageState extends State<MyHomePage> {
           final String item = li[index];
           return Dismissible(
             key: Key(item),
-              onDismissed: (DismissDirection direction){
-
-              },
+            onDismissed: (DismissDirection direction) {
+              // setState(() => li.removeAt(index));
+              Scaffold.of(ctx).showSnackBar(const SnackBar(content: Text("data")),);
+            },
             child: ListTile(
               title: Center(
                 child: Text(item),
