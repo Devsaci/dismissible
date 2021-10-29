@@ -1,70 +1,73 @@
-import 'dart:io';
-
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+// MyApp is a StatefulWidget. This allows updating the state of the
+// widget when an item is removed.
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: '116. Dismissible'),
-    );
+  MyAppState createState() {
+    return MyAppState();
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-  final String title;
+class MyAppState extends State<MyApp> {
+  final items = List<String>.generate(20, (i) => 'Item ${i + 1}');
 
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    final li = List<String>.generate(10, (index) => "Item Num  ${index + 1}");
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
+    const title = 'Dismissing Items';
+
+    return MaterialApp(
+      title: title,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
       ),
-      body: ListView.builder(
-        itemCount: li.length,
-        itemBuilder: (BuildContext ctx, int index) {
-          final String item = li[index];
-          return Dismissible(
-            key: Key(item),
-            onDismissed: (DismissDirection direction) {
-              // setState(() => li.removeAt(index));
-              Scaffold.of(ctx).showSnackBar(
-                SnackBar(
-                  content: Text("Item Deleted"),
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text(title),
+        ),
+        body: ListView.builder(
+          itemCount: items.length,
+          itemBuilder: (context, index) {
+            final item = items[index];
+            return Dismissible(
+              // Each Dismissible must contain a Key. Keys allow Flutter to
+              // uniquely identify widgets.
+              key: Key(item),
+              // Provide a function that tells the app
+              // what to do after an item has been swiped away.
+              onDismissed: (DismissDirection direction) {
+                // Remove the item from the data source.
+                setState(() {
+                  items.removeAt(index);
+                });
+
+                // Then show a snackbar.
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text('$item dismissed'),
                   action: SnackBarAction(
                       label: "Undo",
                       onPressed: () {
                         setState(() {
-                          li.insert(index, item);
+                          items.insert(index, item);
                         });
                       }),
-                ),
-              );
-            },
-            child: ListTile(
-              title: Center(
-                child: Text(item),
+                ));
+              },
+              // Show a red background as the item is swiped away.
+              background: Container(color: Colors.red),
+              child: ListTile(
+                title: Center(child: Text(item)),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }
