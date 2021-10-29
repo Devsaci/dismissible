@@ -47,10 +47,10 @@ class MyAppState extends State<MyApp> {
                 setState(() {
                   items.removeAt(index);
                 });
-
                 // Then show a snackbar.
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  content: Text('$item dismissed'),
+                ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                  content: Text(direction == DismissDirection.startToEnd ? '$item dismissed' : '$item liked' ),
                   action: SnackBarAction(
                       label: "Undo",
                       onPressed: () {
