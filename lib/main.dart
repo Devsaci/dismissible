@@ -51,7 +51,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   action:
                       SnackBarAction(
                           label: "Undo",
-                          onPressed: () {}),
+                          onPressed: () {
+                            setState(() {
+
+                            });
+                          }),
                 ),
               );
             },
