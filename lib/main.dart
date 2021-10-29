@@ -36,7 +36,10 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: ListView.builder(
         itemBuilder: (BuildContext context, int index) {
-          return Center(child: Text(" Dismissible"));
+          return ListTile(
+            title: Center(child: Text(" Dismissible")
+            ),
+          );
         },
       ),
     );
