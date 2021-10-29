@@ -30,14 +30,14 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    var li;
+    final li = List<String>.generate(10,(index) => "Item Num  ${index +1}" );
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
       body: ListView.builder(
         itemCount: li.length,
-        itemBuilder: (BuildContext context, int index) {
+        itemBuilder: (BuildContext ctx, int index) {
           return Dismissible(
             key: Key("value"),
             child: ListTile(
