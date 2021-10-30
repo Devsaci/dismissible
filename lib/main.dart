@@ -48,32 +48,81 @@ class MyAppState extends State<MyApp> {
                   items.removeAt(index);
                 });
                 // Then show a snackbar.
-                ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(direction == DismissDirection.startToEnd
-                          ? '$item dismissed'
-                          : '$item liked'),
-                      action: SnackBarAction(
-                          label: "Undo",
-                          onPressed: () {
-                            setState(() {
-                              items.insert(index, item);
-                            });
-                          }),
-                    ));
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text(direction == DismissDirection.startToEnd
+                      ? '$item dismissed'
+                      : '$item liked'),
+                  action: SnackBarAction(
+                      label: "Undo",
+                      onPressed: () {
+                        setState(() {
+                          items.insert(index, item);
+                        });
+                      }),
+                ));
+              },
+              confirmDismiss: (direction) async {
+                if (direction == DismissDirection.startToEnd) {
+                  final bool res =
+                      await showDialog(context: context, builder: (context) {
+                        return AlertDialog();
+                      });
+                  return res;
+                } else {
+                  return true;
+                }
               },
               // Show a red background as the item is swiped away.
-              child: ListTile(
-                  title: Center(child: Text(item))),
+              child: ListTile(title: Center(child: Text(item))),
               background: Container(
                 color: Colors.red,
                 alignment: Alignment.centerLeft,
-                child: Icon(Icons.save),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: const [
+                    SizedBox(
+                      width: 50,
+                    ),
+                    Icon(
+                      Icons.save,
+                      color: Colors.white,
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Text(
+                      "Delete",
+                      style: TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.left,
+                    )
+                  ],
+                ),
               ),
               secondaryBackground: Container(
                 color: Colors.yellow,
                 alignment: Alignment.centerRight,
-                child: Icon(Icons.save),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: const [
+                    SizedBox(
+                      width: 50,
+                    ),
+                    Icon(
+                      Icons.camera,
+                      color: Colors.black,
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Text(
+                      "Liked",
+                      style: TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.right,
+                    )
+                  ],
+                ),
               ),
             );
           },
