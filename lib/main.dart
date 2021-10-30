@@ -63,13 +63,27 @@ class MyAppState extends State<MyApp> {
               },
               confirmDismiss: (direction) async {
                 if (direction == DismissDirection.startToEnd) {
-                  final bool res =
-                      await showDialog(context: context, builder: (context) {
+                  final bool res = await showDialog(
+                      context: context,
+                      builder: (context) {
                         return AlertDialog(
-                            content: Text("Are You Sure You Want to delete $item ? "),
+                          content:
+                              Text("Are You Sure You Want to delete $item ? "),
                           actions: [
-                            FlatButton(onPressed: (){}, child: Text("Cancel")),
-                            FlatButton(onPressed: (){}, child: Text("Delete")),
+                            FlatButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: Text(
+                                  "Cancel",
+                                  style: TextStyle(color: Colors.greenAccent),
+                                )),
+                            FlatButton(
+                                onPressed: () {},
+                                child: Text(
+                                  "Delete",
+                                  style: TextStyle(color: Colors.red),
+                                )),
                           ],
                         );
                       });
