@@ -65,7 +65,9 @@ class MyAppState extends State<MyApp> {
                 if (direction == DismissDirection.startToEnd) {
                   final bool res =
                       await showDialog(context: context, builder: (context) {
-                        return AlertDialog();
+                        return AlertDialog(
+                            content: Text("Are You Sure You Want to delete $item ? "),
+                        );
                       });
                   return res;
                 } else {
