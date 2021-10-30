@@ -67,6 +67,10 @@ class MyAppState extends State<MyApp> {
                       await showDialog(context: context, builder: (context) {
                         return AlertDialog(
                             content: Text("Are You Sure You Want to delete $item ? "),
+                          actions: [
+                            FlatButton(onPressed: (){}, child: Text("Cancel")),
+                            FlatButton(onPressed: (){}, child: Text("Delete")),
+                          ],
                         );
                       });
                   return res;
