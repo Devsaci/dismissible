@@ -83,6 +83,7 @@ class MyAppState extends State<MyApp> {
                                   setState(() {
                                     items.removeAt(index);
                                   });
+                                  Navigator.of(context).pop();
                                 },
                                 child: Text(
                                   "Delete",
