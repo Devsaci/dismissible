@@ -50,20 +50,30 @@ class MyAppState extends State<MyApp> {
                 // Then show a snackbar.
                 ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                  content: Text(direction == DismissDirection.startToEnd ? '$item dismissed' : '$item liked' ),
-                  action: SnackBarAction(
-                      label: "Undo",
-                      onPressed: () {
-                        setState(() {
-                          items.insert(index, item);
-                        });
-                      }),
-                ));
+                      content: Text(direction == DismissDirection.startToEnd
+                          ? '$item dismissed'
+                          : '$item liked'),
+                      action: SnackBarAction(
+                          label: "Undo",
+                          onPressed: () {
+                            setState(() {
+                              items.insert(index, item);
+                            });
+                          }),
+                    ));
               },
               // Show a red background as the item is swiped away.
-              background: Container(color: Colors.red),
               child: ListTile(
-                title: Center(child: Text(item)),
+                  title: Center(child: Text(item))),
+              background: Container(
+                color: Colors.red,
+                alignment: Alignment.centerLeft,
+                child: Icon(Icons.save),
+              ),
+              secondaryBackground: Container(
+                color: Colors.yellow,
+                alignment: Alignment.centerRight,
+                child: Icon(Icons.save),
               ),
             );
           },
