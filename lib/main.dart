@@ -79,7 +79,11 @@ class MyAppState extends State<MyApp> {
                                   style: TextStyle(color: Colors.greenAccent),
                                 )),
                             FlatButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  setState(() {
+                                    items.removeAt(index);
+                                  });
+                                },
                                 child: Text(
                                   "Delete",
                                   style: TextStyle(color: Colors.red),
